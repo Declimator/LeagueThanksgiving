@@ -3,28 +3,24 @@ PImage farmyard;
 boolean gameOver = false;
 
  // Declare and initialize a variable (numberOfTurkeys) to store how many turkeys are in the race (2-8)
- 
+ int numberOfTurkeys;
  // Declare an array (turkeys) that is big enough to hold all the turkeys 
- 
-
+ Turkey[] turkeys = new Turkey[8];
 void setup() {
   // This sets the size of the text used for the lane labels.
   textSize(20);
   
  // Set the size of the race course (make the width bigger for a longer race).
- 
+  size(1000, 500);
  
  // Load a picture into the farmyard to be used as the race background (grass.jpg has been provided for you),
- 
-
+ farmyard = loadImage("grass.jpg");
  // Resize the farmyard so it will fill the sketch
- 
- 
-
+ farmyard.resize(1000, 550);
  // Create the turkeys and put them in the array. 
  // Example:     turkeys[0] = new Turkey(0, y-value);
  // NOTE: Each turkey will need a unique y value to place it in a different racing lane
- 
+ turkeys[0] = new Turkey(0, 10);
 
 }
 
@@ -32,7 +28,7 @@ void draw() {
   
  if (!gameOver) {
     // Draw the background (farmyard)
- 
+    image(farmyard, 0, -50);
     drawLaneMarkers();   // This method draws the lines between each racing lane
     drawTurkeys();       // This method draws each turkey
     moveTurkeys();       // This method moves the turkeys during the race 
@@ -77,6 +73,10 @@ void checkForWinner() {
 void drawLaneMarkers() {
    // Put code here to draw lines to show the lanes of the racing course
    // Add text in each lane to show which turkey # is racing in it
+   for(int i = 0; i < turkeys.length; i++){
+     strokeWeight(2);
+     line(0, (500/turkeys.length)*(i+1), 1000, (500/turkeys.length)*(i+1));
+   }
 } 
 
 class Confetti {
